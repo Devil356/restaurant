@@ -8,14 +8,17 @@ import java.time.LocalDateTime;
  */
 
 public class User {
+    private int id;
     private boolean isVoted;
     private LocalDateTime voteTime;
     private int restaurantId;
+    String name;
 
-    public User(boolean isVoted, LocalDateTime voteTime, int restaurantId) {
+    public User(String name, boolean isVoted, LocalDateTime voteTime, int restaurantId) {
         this.isVoted = isVoted;
         this.voteTime = voteTime;
         this.restaurantId = restaurantId;
+        this.name = name;
     }
 
     public boolean isVoted() {
@@ -28,5 +31,9 @@ public class User {
 
     public int getRestaurantId() {
         return restaurantId;
+    }
+
+    public int getId() {
+        return id;
     }
 }

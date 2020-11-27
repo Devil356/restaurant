@@ -1,5 +1,9 @@
 package model;
 
+/*
+Блюдо с названием и ценой.
+ */
+
 public class Dish {
     private String name;
     private double price;

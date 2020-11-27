@@ -9,9 +9,16 @@ import java.util.List;
  */
 
 public class Admin {
+    private int id;
+
+    //Рестораны, которыми владеет админ
     private List<Restaurant> restaurants;
 
     public List<Restaurant> getRestaurants() {
         return restaurants;
+    }
+
+    public int getId() {
+        return id;
     }
 }

@@ -9,8 +9,14 @@ import java.util.List;
 
 public class Restaurant {
     private int id;
+
+    //Админ, который владеет этим рестораном
     private Admin admin;
+
+    //Меню, представленное в данном ресторане
     private Menu menu;
+
+    //Список пользователей, проголосовавших за ресторан
     private List<User> users;
 
     public Restaurant(Admin admin, Menu menu, List<User> users) {
