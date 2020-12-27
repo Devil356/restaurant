@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 DROP TABLE IF EXISTS restaurant;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS user_role;
@@ -37,7 +36,3 @@ CREATE TABLE menus
 (
 restaurant_id
 );
-=======
-DROP TABLE IF EXISTS restaurants;
-DROP TABLE IF EXISTS users;
->>>>>>> e45bb9c46db1017ad2ae10a59cae239a69c4e5d2

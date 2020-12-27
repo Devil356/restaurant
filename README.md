@@ -5,5 +5,4 @@
 
 > Admin can be without restaurant. 
 > And restaurant can't be without admin.
-=======
 >Users can vote on which restaurant they want to have lunch at.
