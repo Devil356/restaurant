@@ -19,13 +19,13 @@ public class Restaurant extends AbstractNamedEntity {
     private Menu menu;
 
     //Список пользователей, проголосовавших за ресторан
-    private List<User> users;
+    private List<Integer> users;
 
-    public Restaurant(Integer id, String name, Admin admin, Menu menu, List<User> users) {
+    public Restaurant(Integer id, String name, Admin admin, Menu menu) {
         super(id, name);
         this.admin = admin;
         this.menu = menu;
-        this.users = users;
+        this.users = null;
     }
 
     public Admin getAdmin() {
@@ -36,7 +36,7 @@ public class Restaurant extends AbstractNamedEntity {
         return menu;
     }
 
-    public List<User> getUsers() {
+    public List<Integer> getUsers() {
         return users;
     }
 
