@@ -1,4 +1,6 @@
-package model;
+package model.user;
+
+import model.Restaurant;
 
 import java.util.List;
 
@@ -8,17 +10,27 @@ import java.util.List;
 (2-5 позиций, название еды и цену).
  */
 
-public class Admin {
-    private int id;
+public class Admin extends AbstractUser {
 
-    //Рестораны, которыми владеет админ
+    /**
+     * Рестораны, которыми владеет администратор
+     */
     private List<Restaurant> restaurants;
+
+    public Admin(Integer id, String name, String email) {
+        super(id, name, email);
+        this.restaurants = null;
+    }
+
+    public Admin(){
+
+    }
 
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }
 
-    public int getId() {
-        return id;
+    public void addRestaurant(Restaurant restaurant) {
+        restaurants.add(restaurant);
     }
 }

@@ -1,5 +1,8 @@
 package model;
 
+import model.user.Admin;
+import model.user.User;
+
 import java.util.List;
 
 /*
@@ -7,8 +10,7 @@ import java.util.List;
 проголосовавших за ресторан людей.
  */
 
-public class Restaurant {
-    private int id;
+public class Restaurant extends AbstractEntity{
 
     //Админ, который владеет этим рестораном
     private Admin admin;
@@ -19,7 +21,8 @@ public class Restaurant {
     //Список пользователей, проголосовавших за ресторан
     private List<User> users;
 
-    public Restaurant(Admin admin, Menu menu, List<User> users) {
+    public Restaurant(Integer id, String name, Admin admin, Menu menu, List<User> users) {
+        super(id, name);
         this.admin = admin;
         this.menu = menu;
         this.users = users;
@@ -37,7 +40,4 @@ public class Restaurant {
         return users;
     }
 
-    public int getId() {
-        return id;
-    }
 }

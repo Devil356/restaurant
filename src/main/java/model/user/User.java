@@ -1,4 +1,4 @@
-package model;
+package model.user;
 
 import java.time.LocalDateTime;
 
@@ -7,33 +7,35 @@ import java.time.LocalDateTime;
 Только один голос учитывается. Если юзер меняет свое решение в тот же день, то до 11:00 он еще может его изменить.
  */
 
-public class User {
-    private int id;
-    private boolean isVoted;
-    private LocalDateTime voteTime;
-    private int restaurantId;
-    String name;
+public class User extends AbstractUser {
 
-    public User(String name, boolean isVoted, LocalDateTime voteTime, int restaurantId) {
-        this.isVoted = isVoted;
+    private LocalDateTime voteTime;
+
+    private Integer restaurantId;
+
+    public User(Integer id, String name, String email) {
+        super(id, name, email);
+    }
+
+    public User(){
+
+    }
+
+    public void vote(Integer restaurantId, LocalDateTime voteTime) {
         this.voteTime = voteTime;
         this.restaurantId = restaurantId;
-        this.name = name;
     }
 
     public boolean isVoted() {
-        return isVoted;
+        return restaurantId != null;
     }
 
     public LocalDateTime getVoteTime() {
         return voteTime;
     }
 
-    public int getRestaurantId() {
+    public Integer getRestaurantId() {
         return restaurantId;
     }
 
-    public int getId() {
-        return id;
-    }
 }

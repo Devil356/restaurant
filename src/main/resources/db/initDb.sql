@@ -6,28 +6,33 @@ DROP SEQUENCE IF EXISTS global_seq;
 
 CREATE SEQUENCE global_seq START WITH 1000_000;
 
-CREATE TABLE user
+CREATE TABLE users
 (
 id
 name
-
+isVoted
+voteTime
+restaurantId
 );
 
-CREATE TABLE restaurant
+CREATE TABLE restaurants
 (
 id
+admin
+menu
+users
 user_id
 
 
 );
 
-CREATE TABLE user_role
+CREATE TABLE user_roles
 (
 user_id
 role
 );
 
-CREATE TABLE menu
+CREATE TABLE menus
 (
 restaurant_id
 );
