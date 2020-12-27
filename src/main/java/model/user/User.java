@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 Только один голос учитывается. Если юзер меняет свое решение в тот же день, то до 11:00 он еще может его изменить.
  */
 
-public class User extends AbstractUser {
+public class User extends AbstractNamedUser {
 
     private LocalDateTime voteTime;
 

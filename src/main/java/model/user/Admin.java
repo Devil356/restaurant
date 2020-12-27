@@ -10,7 +10,7 @@ import java.util.List;
 (2-5 позиций, название еды и цену).
  */
 
-public class Admin extends AbstractUser {
+public class Admin extends AbstractNamedUser {
 
     /**
      * Рестораны, которыми владеет администратор

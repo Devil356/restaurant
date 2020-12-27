@@ -10,7 +10,7 @@ import java.util.List;
 проголосовавших за ресторан людей.
  */
 
-public class Restaurant extends AbstractEntity{
+public class Restaurant extends AbstractNamedEntity {
 
     //Админ, который владеет этим рестораном
     private Admin admin;
