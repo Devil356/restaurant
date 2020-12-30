@@ -1,7 +1,7 @@
 package testData;
 
 
-import model.user.Admin;
+import model.to.Admin;
 
 public class AdminTestData {
     public static final Admin admin1 = new Admin();

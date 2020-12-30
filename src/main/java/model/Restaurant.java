@@ -1,43 +1,48 @@
 package model;
 
-import model.user.Admin;
-import model.user.User;
-
-import java.util.List;
+import javax.persistence.*;
 
 /*
 Ресторан, которым владеет определенный администратор. У каждого ресторана свое меню. @field users - количество
 проголосовавших за ресторан людей.
  */
-
+@Entity
+@Table(name = "restaurants")
 public class Restaurant extends AbstractNamedEntity {
 
     //Админ, который владеет этим рестораном
-    private Admin admin;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "admin_id", nullable = false)
+    private User user;
 
     //Меню, представленное в данном ресторане
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "menu_id",nullable = false)
     private Menu menu;
 
-    //Список пользователей, проголосовавших за ресторан
-    private List<User> users;
+    public Restaurant(){
 
-    public Restaurant(Integer id, String name, Admin admin, Menu menu) {
+    }
+    public Restaurant(Integer id, String name, User user, Menu menu) {
         super(id, name);
-        this.admin = admin;
+        this.user = user;
         this.menu = menu;
-        this.users = null;
     }
 
-    public Admin getAdmin() {
-        return admin;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public Menu getMenu() {
         return menu;
-    }
-
-    public List<User> getUsers() {
-        return users;
     }
 
 }
