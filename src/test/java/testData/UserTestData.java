@@ -1,6 +1,6 @@
 package testData;
 
-import model.user.User;
+import model.User;
 
 public class UserTestData {
     public static User generateUser(){
