@@ -1,8 +1,5 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
 import java.time.LocalDateTime;
 public class Vote {
     private Integer userId;

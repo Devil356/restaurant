@@ -1,10 +1,8 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import java.util.Arrays;
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
 Меню, привязанное к определенному ресторану, с определенным списком блюд.
@@ -13,28 +11,40 @@ import java.util.List;
 @Table(name = "menus")
 public class Menu extends AbstractEntity {
 
-    @ManyToMany
-    private List<Dish> dishes;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "menus_dishes",
+            joinColumns = {@JoinColumn(name = "menu_id")},
+            inverseJoinColumns = {@JoinColumn(name = "dish_id")}
+    )
+    private Set<Dish> dishes = new HashSet<>();
 
-    public Menu(Integer id, Dish... dishes) {
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
+    public Menu(Integer id, Set<Dish> dishes, Restaurant restaurant) {
         super(id);
-        if (dishes.length > 0) {
-            this.dishes.addAll(Arrays.asList(dishes));
-        }
+        setDishes(dishes);
     }
 
     public Menu(){
 
     }
-    public Menu change(Integer restaurantId, Dish... dishes) {
-        return new Menu(restaurantId, dishes);
+
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setDishes(List<Dish> dishes) {
-        this.dishes = dishes;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
-    public List<Dish> getDishes() {
+    public Set<Dish> getDishes() {
         return dishes;
+    }
+
+    public void setDishes(Set<Dish> dishes) {
+        this.dishes = dishes;
     }
 }
