@@ -23,9 +23,8 @@ public class Menu extends AbstractEntity {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    public Menu(Integer id, Set<Dish> dishes, Restaurant restaurant) {
+    public Menu(Integer id, Restaurant restaurant) {
         super(id);
-        setDishes(dishes);
     }
 
     public Menu(){

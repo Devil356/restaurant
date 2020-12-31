@@ -9,13 +9,13 @@ DROP SEQUENCE IF EXISTS users_seq;
 DROP SEQUENCE IF EXISTS restaurants_seq;
 DROP SEQUENCE IF EXISTS dishes_seq;
 DROP SEQUENCE IF EXISTS menus_seq;
--- DROP SEQUENCE IF EXISTS menus_dishes_seq;
+DROP SEQUENCE IF EXISTS votes_seq;
 
 CREATE SEQUENCE users_seq START WITH 100000;
 CREATE SEQUENCE restaurants_seq START WITH 100000;
 CREATE SEQUENCE dishes_seq START WITH 100000;
 CREATE SEQUENCE menus_seq START WITH 100000;
--- CREATE SEQUENCE menus_dishes_seq START WITH 100000;
+CREATE SEQUENCE votes_seq START WITH 100000;
 
 CREATE TABLE users
 (
@@ -32,42 +32,42 @@ CREATE TABLE user_roles
     CONSTRAINT user_roles_idx UNIQUE (user_id, role),
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+CREATE TABLE menus
+(
+    id            INTEGER PRIMARY KEY DEFAULT nextval('menus_seq')
+);
 
 CREATE TABLE restaurants
 (
     id       INTEGER PRIMARY KEY DEFAULT nextval('restaurants_seq'),
     name     VARCHAR NOT NULL,
     admin_id INTEGER NOT NULL,
-    FOREIGN KEY (admin_id) REFERENCES users (id) ON DELETE CASCADE
+    menu_id INTEGER NOT NULL ,
+    FOREIGN KEY (admin_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (menu_id) REFERENCES menus (id) ON DELETE CASCADE
 );
 
-CREATE TABLE menus
-(
-    id            INTEGER PRIMARY KEY DEFAULT nextval('menus_seq'),
-    restaurant_id INTEGER NOT NULL,
-    FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
-);
+
 
 CREATE TABLE dishes
 (
-    id      INTEGER PRIMARY KEY DEFAULT nextval('dishes_seq'),
-    name    VARCHAR NOT NULL,
-    price   FLOAT   NOT NULL
+    id    INTEGER PRIMARY KEY DEFAULT nextval('dishes_seq'),
+    name  VARCHAR NOT NULL,
+    price FLOAT   NOT NULL
 );
 
 CREATE TABLE menus_dishes
 (
     menu_id INTEGER REFERENCES menus (id)  NOT NULL,
     dish_id INTEGER REFERENCES dishes (id) NOT NULL
---     FOREIGN KEY (menu_id) REFERENCES menus (id) ON DELETE CASCADE,
---     FOREIGN KEY (dish_id) REFERENCES dishes (id) ON DELETE CASCADE
 );
 
 CREATE TABLE votes
 (
-    user_id       INTEGER                 NOT NULL,
-    vote_time      TIMESTAMP DEFAULT now() NOT NULL,
-    restaurant_id INTEGER                 NOT NULL,
+    id            INTEGER PRIMARY KEY DEFAULT nextval('votes_seq'),
+    user_id       INTEGER                           NOT NULL,
+    vote_time     TIMESTAMP           DEFAULT now() NOT NULL,
+    restaurant_id INTEGER                           NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );

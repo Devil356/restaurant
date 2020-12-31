@@ -1,7 +1,6 @@
 package model;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -21,9 +20,6 @@ public class User extends AbstractNamedEntity {
     @ElementCollection
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "admin", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Restaurant> restaurants;
-
     public User(Integer id, String name, String email, Role... roles) {
         super(id, name);
         this.email = email;
@@ -32,14 +28,6 @@ public class User extends AbstractNamedEntity {
 
     public User() {
 
-    }
-
-    public Set<Restaurant> getRestaurants() {
-        return restaurants;
-    }
-
-    public void setRestaurants(Set<Restaurant> restaurants) {
-        this.restaurants = restaurants;
     }
 
     public String getEmail() {

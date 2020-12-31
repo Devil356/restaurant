@@ -1,9 +1,19 @@
 package model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "votes")
 public class Vote {
+    @Column(name = "user_id")
     private Integer userId;
+
+    @Column(name = "vote_time")
     private LocalDateTime voteTime;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     public Vote() {
