@@ -1,6 +1,6 @@
 package testData;
 
-import model.Menu;
+import ru.arsenev.restaurant.model.Menu;
 
 public class MenuTestData {
     public static Menu genetateMenu(){

@@ -1,6 +1,7 @@
-package model;
+package ru.arsenev.restaurant.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,15 +21,23 @@ public class Menu extends AbstractEntity {
     private Set<Dish> dishes = new HashSet<>();
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "restaurant_id")
+    @JoinTable(
+            name = "restaurants_menus",
+            joinColumns = {@JoinColumn(name = "menu_id")},
+            inverseJoinColumns = {@JoinColumn(name = "restaurant_id")}
+    )
     private Restaurant restaurant;
 
-    public Menu(Integer id, Restaurant restaurant) {
+    @Column(name = "created")
+    private LocalDateTime created;
+
+    public Menu(Integer id) {
         super(id);
+        this.created = LocalDateTime.now();
     }
 
     public Menu(){
-
+        this.created = LocalDateTime.now();
     }
 
     public Restaurant getRestaurant() {

@@ -1,4 +1,4 @@
-package model;
+package ru.arsenev.restaurant.model;
 
 import javax.persistence.*;
 import java.util.Set;

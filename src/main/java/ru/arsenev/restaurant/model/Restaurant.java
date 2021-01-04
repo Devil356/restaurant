@@ -1,4 +1,4 @@
-package model;
+package ru.arsenev.restaurant.model;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -16,8 +16,12 @@ public class Restaurant extends AbstractNamedEntity {
     @JoinColumn(name = "admin_id", nullable = false)
     private User admin;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menu_id", nullable = false)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "restaurants_menus",
+            joinColumns = {@JoinColumn(name = "restaurant_id")},
+            inverseJoinColumns = {@JoinColumn(name = "menu_id")}
+    )
     private Menu menu;
 
     public Restaurant(){
@@ -25,6 +29,11 @@ public class Restaurant extends AbstractNamedEntity {
     }
     public Restaurant(Integer id, String name, User admin) {
         super(id, name);
+        this.admin = admin;
+    }
+
+    public Restaurant(String name, User admin) {
+        setName(name);
         this.admin = admin;
     }
 

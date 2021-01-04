@@ -1,11 +1,11 @@
-package model;
+package ru.arsenev.restaurant.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "votes")
-public class Vote {
+public class Vote extends AbstractEntity{
     @Column(name = "user_id")
     private Integer userId;
 

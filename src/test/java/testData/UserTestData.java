@@ -1,6 +1,6 @@
 package testData;
 
-import model.User;
+import ru.arsenev.restaurant.model.User;
 
 public class UserTestData {
     public static User generateUser(){

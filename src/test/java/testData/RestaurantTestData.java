@@ -1,16 +1,12 @@
 package testData;
 
-import model.Restaurant;
+import ru.arsenev.restaurant.model.Restaurant;
 
 import java.util.List;
 
 public class RestaurantTestData {
 
-    public static List<Restaurant> getFewRestaurants(){
-        return null;
-    }
-
-    private static Restaurant generateRestaurant(){
-        return null;
+    public static Restaurant generateRestaurant() {
+        return new Restaurant(null, "First Restaurant", AdminTestData.generateAdmin());
     }
 }

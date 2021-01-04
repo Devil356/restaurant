@@ -1,4 +1,4 @@
-package model;
+package ru.arsenev.restaurant.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,11 +10,9 @@ import java.util.Set;
 @Entity
 @Table(name = "dishes")
 public class Dish extends AbstractNamedEntity {
-    //стоимость блюда
     @Column(name = "price")
     private double price;
 
-    //меню, в котором это блюдо будет представлено
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "menus_dishes",
@@ -27,8 +25,13 @@ public class Dish extends AbstractNamedEntity {
 
     }
 
-    public Dish(Integer id, String name, double price) {
+    public Dish(Integer id, String name, double price){
         super(id, name);
+        this.price = price;
+    }
+
+    public Dish(String name, double price){
+        setName(name);
         this.price = price;
     }
 

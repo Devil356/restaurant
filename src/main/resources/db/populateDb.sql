@@ -10,6 +10,10 @@ DELETE
 FROM restaurants;
 DELETE
 FROM users;
+DELETE
+FROM restaurants_menus;
+DELETE
+FROM dishes;
 ALTER SEQUENCE users_seq RESTART WITH 100000;
 ALTER SEQUENCE restaurants_seq RESTART WITH 100000;
 ALTER SEQUENCE dishes_seq RESTART WITH 100000;
@@ -33,15 +37,22 @@ VALUES (100000, 'ADMIN'),
        (100004, 'USER'),
        (100005, 'USER');
 
-INSERT INTO menus (id)
-VALUES (100000),
-       (100001),
-       (100002);
 
-INSERT INTO restaurants(name, admin_id, menu_id)
-VALUES ('First restaurant', 100000, 100000),
-       ('Second restaurant', 100000, 100000),
-       ('Third restaurant', 100001, 100001);
+
+INSERT INTO restaurants(name, admin_id)
+VALUES ('First restaurant', 100000),
+       ('Second restaurant', 100000),
+       ('Third restaurant', 100001);
+
+INSERT INTO menus (created)
+VALUES ('2020-12-31 13:00:00'),
+       ('2020-12-31 13:00:00'),
+       ('2020-12-31 13:00:00');
+
+INSERT INTO restaurants_menus(menu_id, restaurant_id)
+VALUES (100000,100001),
+       (100001,100002),
+       (100002,100000);
 
 INSERT INTO dishes (name, price)
 VALUES ('Fish', 100.0),

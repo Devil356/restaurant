@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS votes;
 DROP TABLE IF EXISTS menus_dishes;
 DROP TABLE IF EXISTS dishes;
+DROP TABLE IF EXISTS restaurants_menus;
 DROP TABLE IF EXISTS menus;
 DROP TABLE IF EXISTS restaurants;
 DROP TABLE IF EXISTS users;
@@ -32,21 +33,26 @@ CREATE TABLE user_roles
     CONSTRAINT user_roles_idx UNIQUE (user_id, role),
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
-CREATE TABLE menus
-(
-    id            INTEGER PRIMARY KEY DEFAULT nextval('menus_seq')
-);
 
 CREATE TABLE restaurants
 (
     id       INTEGER PRIMARY KEY DEFAULT nextval('restaurants_seq'),
     name     VARCHAR NOT NULL,
     admin_id INTEGER NOT NULL,
-    menu_id INTEGER NOT NULL ,
-    FOREIGN KEY (admin_id) REFERENCES users (id) ON DELETE CASCADE,
-    FOREIGN KEY (menu_id) REFERENCES menus (id) ON DELETE CASCADE
+    FOREIGN KEY (admin_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
+CREATE TABLE menus
+(
+    id      INTEGER PRIMARY KEY DEFAULT nextval('menus_seq'),
+    created TIMESTAMP           DEFAULT now()
+);
+CREATE TABLE restaurants_menus
+(
+    menu_id       INTEGER REFERENCES menus (id) ON DELETE CASCADE,
+    restaurant_id INTEGER REFERENCES restaurants (id) ON DELETE CASCADE,
+    PRIMARY KEY (menu_id, restaurant_id)
+);
 
 
 CREATE TABLE dishes
@@ -59,7 +65,8 @@ CREATE TABLE dishes
 CREATE TABLE menus_dishes
 (
     menu_id INTEGER REFERENCES menus (id)  NOT NULL,
-    dish_id INTEGER REFERENCES dishes (id) NOT NULL
+    dish_id INTEGER REFERENCES dishes (id) NOT NULL,
+    PRIMARY KEY (menu_id, dish_id)
 );
 
 CREATE TABLE votes
