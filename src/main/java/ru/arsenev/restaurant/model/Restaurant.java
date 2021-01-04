@@ -9,9 +9,23 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "restaurants")
-public class Restaurant extends AbstractNamedEntity {
+public class Restaurant {
+    @Id
+    @SequenceGenerator(
+            name = "restaurants_seq",
+            sequenceName = "restaurants_seq",
+            allocationSize = 1,
+            initialValue = 100000
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "restaurants_seq"
+    )
+    private Integer id;
 
-    //Админ, который владеет этим рестораном
+    @Column(name = "name")
+    private String name;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "admin_id", nullable = false)
     private User admin;
@@ -28,12 +42,13 @@ public class Restaurant extends AbstractNamedEntity {
 
     }
     public Restaurant(Integer id, String name, User admin) {
-        super(id, name);
+        this.id = id;
+        this.name = name;
         this.admin = admin;
     }
 
     public Restaurant(String name, User admin) {
-        setName(name);
+        this.name = name;
         this.admin = admin;
     }
 
@@ -53,6 +68,22 @@ public class Restaurant extends AbstractNamedEntity {
         this.menu = menu;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,5 +95,15 @@ public class Restaurant extends AbstractNamedEntity {
     @Override
     public int hashCode() {
         return Objects.hash(admin);
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", admin=" + admin.getId() +
+                ", menu=" + menu +
+                '}';
     }
 }

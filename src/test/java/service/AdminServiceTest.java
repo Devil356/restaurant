@@ -18,7 +18,6 @@ public class AdminServiceTest extends AbstractServiceClass {
 
     @Test
     public void createRestaurant(){
-        System.out.println("ENTERING IN METHOD");
         Restaurant created = adminService.createRestaurant("First Restaurant", 100000);
         int newId = created.getId();
         Restaurant newRestaurant = RestaurantTestData.generateRestaurant();

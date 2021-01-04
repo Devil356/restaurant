@@ -10,7 +10,19 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "menus")
-public class Menu extends AbstractEntity {
+public class Menu {
+    @Id
+    @SequenceGenerator(
+            name = "menus_seq",
+            sequenceName = "menus_seq",
+            allocationSize = 1,
+            initialValue = 100000
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "menus_seq"
+    )
+    private Integer id;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -29,10 +41,10 @@ public class Menu extends AbstractEntity {
     private Restaurant restaurant;
 
     @Column(name = "created")
-    private LocalDateTime created;
+    private final LocalDateTime created;
 
     public Menu(Integer id) {
-        super(id);
+        this.id = id;
         this.created = LocalDateTime.now();
     }
 
@@ -54,5 +66,27 @@ public class Menu extends AbstractEntity {
 
     public void setDishes(Set<Dish> dishes) {
         this.dishes = dishes;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", dishes=" + dishes +
+                ", restaurant=" + restaurant.getId() +
+                ", created=" + created +
+                '}';
     }
 }
