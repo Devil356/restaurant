@@ -2,3 +2,5 @@
 com.arsenev.restaurant.iml
 target/
 /lib/
+/log/
+/RESTAURANT_ROOT_IS_UNDEFINED/
